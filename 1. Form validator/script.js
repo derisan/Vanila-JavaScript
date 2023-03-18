@@ -103,19 +103,23 @@ const checkInputValidation = function (input) {
   return success;
 };
 
+const resetInput = function (inputs) {
+  inputs.forEach((input) => {
+    input.value = "";
+    input.parentElement.className = "form-group";
+  });
+};
+
 form.addEventListener("submit", function (e) {
   e.preventDefault();
 
   const inputs = [username, email, password, password2];
 
-  const validates = inputs.reduce(function (a, input) {
+  const allInputValidates = inputs.reduce(function (a, input) {
     return checkInputValidation(input);
   }, true);
 
-  if (validates) {
-    inputs.forEach((input) => {
-      input.value = "";
-      input.parentElement.className = "form-group";
-    });
+  if (allInputValidates) {
+    resetInput(inputs);
   }
 });
