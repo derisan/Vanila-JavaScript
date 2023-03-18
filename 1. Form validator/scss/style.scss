@@ -1,0 +1,113 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+
+$color-background: #f9fafb;
+$color-white: #fff;
+$color-black: #000;
+$color-grey: #777;
+$color-success: #2ecc71;
+$color-error: #e74c3c;
+$color-button: #3498db;
+$max-width: 114rem;
+$min-width: 40rem;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  box-sizing: border-box;
+  background-color: $color-background;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  max-width: $max-width;
+  min-width: $min-width;
+  background-color: $color-white;
+  border-radius: 3px;
+  box-shadow: 0 2px 1rem rgba($color-black, 0.3);
+}
+
+.form {
+  padding: 3rem 4rem;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+  }
+
+  &-group {
+    margin-bottom: 1rem;
+    padding-bottom: 2rem;
+    position: relative;
+
+    .success &__input {
+      border-color: $color-success;
+    }
+
+    .error &__input {
+      border-color: $color-error;
+    }
+
+    .error &__error {
+      visibility: visible;
+    }
+
+    &__label {
+      color: $color-grey;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    &__input {
+      border: 2px solid #f0f0f0;
+      border-radius: 4px;
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.4rem;
+
+      &:focus {
+        outline: none;
+        border-color: $color-grey;
+      }
+    }
+
+    &__error {
+      color: $color-error;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      visibility: hidden;
+    }
+  }
+
+  button {
+    cursor: pointer;
+    background-color: $color-button;
+    border: 2px solid $color-button;
+    border-radius: 4px;
+    color: $color-white;
+    display: block;
+    font-size: 1.6rem;
+    padding: 1rem;
+    margin-top: 2rem;
+    width: 100%;
+
+    &:hover {
+      background-color: darken($color-button, 7.5%);
+    }
+  }
+}
