@@ -1,8 +1,8 @@
-const form = document.querySelector(".form");
-const username = document.getElementById("username");
-const email = document.getElementById("email");
-const password = document.getElementById("password");
-const password2 = document.getElementById("password2");
+const $form = document.querySelector(".form");
+const $username = document.querySelector("#username");
+const $email = document.querySelector("#email");
+const $password = document.querySelector("#password");
+const $passwordConfirm = document.querySelector("#password-confirm");
 
 const MIN_CHARS_USERNAME = 3;
 const MAX_CHARS_USERNAME = 15;
@@ -11,10 +11,10 @@ const MAX_CHARS_PASSWORD = 25;
 const NUM_INPUTS = 4;
 
 const showError = function (elem, msg) {
-  const parent = elem.parentElement;
-  parent.className = "form-group error";
-  const small = parent.querySelector("small");
-  small.innerText = msg;
+  const $parent = elem.parentElement;
+  $parent.className = "form-group error";
+  const $small = $parent.querySelector("small");
+  $small.innerText = msg;
 };
 
 const showSuccess = function (elem) {
@@ -28,10 +28,10 @@ const checkEmail = (input) => {
 
   if (re.test(input.value.trim())) {
     return true;
-  } else {
-    showError(input, "Email is not valid!");
-    return false;
   }
+
+  showError(input, "Email is not valid!");
+  return false;
 };
 
 const getFieldName = function (input) {
@@ -44,6 +44,7 @@ const checkRequired = function (input) {
     showError(input, `${getFieldName(input)} is required!`);
     return false;
   }
+
   return true;
 };
 
@@ -54,7 +55,9 @@ const checkLength = function (input, min, max) {
       `${getFieldName(input)} must be at least ${min} characters!`
     );
     return false;
-  } else if (input.value.length > max) {
+  }
+
+  if (input.value.length > max) {
     showError(
       input,
       `${getFieldName(input)} must be less than ${max} characters!`
@@ -75,33 +78,39 @@ const checkPasswordsMatch = function (pw1, pw2) {
 };
 
 const checkInputValidation = function (input) {
-  let success = checkRequired(input);
+  const isFilled = checkRequired(input);
+  const isValid = isFilled
+    ? (function () {
+        switch (input.id) {
+          case "username":
+            return checkLength(
+              $username,
+              MIN_CHARS_USERNAME,
+              MAX_CHARS_USERNAME
+            );
 
-  if (success) {
-    switch (input.id) {
-      case "username":
-        success = checkLength(username, MIN_CHARS_USERNAME, MAX_CHARS_USERNAME);
-        break;
+          case "email":
+            return checkEmail($email);
 
-      case "email":
-        success = checkEmail(email);
-        break;
+          case "password":
+            return checkLength(
+              $password,
+              MIN_CHARS_PASSWORD,
+              MAX_CHARS_PASSWORD
+            );
 
-      case "password":
-        success = checkLength(password, MIN_CHARS_PASSWORD, MAX_CHARS_PASSWORD);
-        break;
+          case "password-confirm":
+            return checkPasswordsMatch($password, $passwordConfirm);
+        }
+      })()
+    : false;
 
-      case "password2":
-        success = checkPasswordsMatch(password, password2);
-        break;
-    }
-  }
-
-  if (success) {
+  if (isFilled && isValid) {
     showSuccess(input);
+    return true;
   }
 
-  return success;
+  return false;
 };
 
 const resetInput = function (inputs) {
@@ -111,13 +120,13 @@ const resetInput = function (inputs) {
   });
 };
 
-form.addEventListener("submit", function (e) {
+$form.addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const inputs = [username, email, password, password2];
+  const inputs = [$username, $email, $password, $passwordConfirm];
 
-  const numValidInputs = inputs.reduce(function (a, input) {
-    return checkInputValidation(input) ? a + 1 : a;
+  const numValidInputs = inputs.reduce(function (acc, input) {
+    return checkInputValidation(input) ? acc + 1 : acc;
   }, 0);
 
   if (numValidInputs === NUM_INPUTS) {
