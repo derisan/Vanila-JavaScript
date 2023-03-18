@@ -8,6 +8,7 @@ const MIN_CHARS_USERNAME = 3;
 const MAX_CHARS_USERNAME = 15;
 const MIN_CHARS_PASSWORD = 6;
 const MAX_CHARS_PASSWORD = 25;
+const NUM_INPUTS = 4;
 
 const showError = function (elem, msg) {
   const parent = elem.parentElement;
@@ -115,11 +116,11 @@ form.addEventListener("submit", function (e) {
 
   const inputs = [username, email, password, password2];
 
-  const allInputValidates = inputs.reduce(function (a, input) {
-    return checkInputValidation(input);
-  }, true);
+  const numValidInputs = inputs.reduce(function (a, input) {
+    return checkInputValidation(input) ? a + 1 : a;
+  }, 0);
 
-  if (allInputValidates) {
+  if (numValidInputs === NUM_INPUTS) {
     resetInput(inputs);
   }
 });
