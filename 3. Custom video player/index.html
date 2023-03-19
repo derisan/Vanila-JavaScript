@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script
+      src="https://kit.fontawesome.com/2fab340339.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <title>Custom Video Player</title>
+  </head>
+  <body>
+    <section class="section-video">
+      <h1 class="heading-primary">Custom Video Player</h1>
+      <video class="video" poster="img/poster.png">
+        <source src="videos/video.mp4" type="video/mp4" />
+        <source src="videos/video.webm" type="video/webm" />
+      </video>
+      <div class="controls">
+        <button class="btn btn--play">
+          <i class="fa-solid fa-play fa-2x"></i>
+        </button>
+        <button class="btn btn--stop">
+          <i class="fa-solid fa-stop fa-2x"></i>
+        </button>
+        <input
+          type="range"
+          class="controls__progress"
+          min="0"
+          max="100"
+          step="1"
+          value="0"
+        />
+        <span class="controls__timestamp">00:00</span>
+      </div>
+    </section>
+    <script src="script.js"></script>
+  </body>
+</html>
