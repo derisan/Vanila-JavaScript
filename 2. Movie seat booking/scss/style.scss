@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+
+$color-background: #242333;
+$color-white: #fff;
+$color-black: #000;
+$color-seat: #444451;
+$color-seat-selected: #6feaf6;
+$color-seat-occupied: #f7f7f7;
+$color-grey: #777;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  box-sizing: border-box;
+  font-size: 1.6rem;
+  color: $color-white;
+  background-color: $color-background;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.section-booking {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movie-select {
+  margin: 2rem 0;
+}
+
+.select {
+  background-color: $color-white;
+  border-radius: 0.3rem;
+  font-size: 1.4rem;
+  margin-left: 1rem;
+  padding: 0.5rem 0.5rem;
+  appearance: none;
+  text-align: center;
+}
+
+.seat-information {
+  background-color: rgba($color-black, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
+  color: $color-grey;
+
+  ul {
+    list-style: none;
+    display: flex;
+
+    li {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem;
+
+      span {
+        margin-left: 0.2rem;
+        display: inline-block;
+      }
+    }
+  }
+}
+
+.seat-list {
+  perspective: 150rem;
+
+  .seat:nth-of-type(2) {
+    margin-right: 1.8rem;
+  }
+
+  .seat:nth-last-of-type(2) {
+    margin-left: 1.8rem;
+  }
+
+  & .seat:not(.seat__occupied):hover {
+    cursor: pointer;
+    transform: scale(1.2);
+  }
+}
+
+.row {
+  display: flex;
+}
+
+.screen {
+  background-color: $color-white;
+  height: 6rem;
+  margin: 1.5rem 0;
+  transform: rotateX(-45deg);
+  box-shadow: 0 0.3rem 1rem rgba($color-white, 0.7);
+}
+
+.seat {
+  background-color: $color-seat;
+  height: 1.2rem;
+  width: 1.5rem;
+  margin: 3px;
+  border-radius: 1rem 1rem 0 0;
+
+  &__selected {
+    background-color: $color-seat-selected;
+  }
+
+  &__occupied {
+    background-color: $color-seat-occupied;
+  }
+}
+
+.summary__text {
+  margin: 1rem 0;
+
+  span {
+    color: $color-seat-selected;
+  }
+}
