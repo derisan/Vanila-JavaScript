@@ -50,4 +50,4 @@ $video.addEventListener("play", updatePlayIcon);
 $video.addEventListener("timeupdate", onTimeUpdate);
 $btnPlay.addEventListener("click", togglePlayStatus);
 $btnStop.addEventListener("click", stopVideo);
-$progressBar.addEventListener("change", setVideoProgress);
+$progressBar.addEventListener("input", setVideoProgress);
